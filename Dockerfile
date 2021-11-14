@@ -1,4 +1,4 @@
-FROM gegedenice/base-notebook-java-userscd:latest
+FROM azurscd/base-notebook-java-userscd:latest
 ENV HOME=/home/scd
 USER scd
 COPY --chmod=777 . .
