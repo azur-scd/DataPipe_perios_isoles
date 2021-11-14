@@ -38,7 +38,7 @@ jobs:
         with:
           file: Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/datapipe-signalement-docelec:latest
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/datapipe-perios-isoles:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
 
