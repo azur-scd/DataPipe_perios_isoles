@@ -49,8 +49,13 @@ def exec_w(df,rcr):
     if os_platform == 'Linux':
             print(subprocess.run(['/bin/bash','./run_saxon.sh',file_path('xslt/sudoc_harvest.xsl'),file_path('temporary_files/ppns.xml'),file_path('temporary_files/exs_999ni.xml'),rcr]))
     df_sudoc = pd.read_xml(file_path('temporary_files/exs_999ni.xml'))
+    df_sudoc["num_aleph"] = df_sudoc["num_aleph"].fillna(0)
+    df_sudoc["num_aleph"] = df_sudoc["num_aleph"].round(0).astype(int).astype(str).apply(lambda x : x.rjust(9,'0')).replace('000000000', '')
+    df = df.astype(str)
+    df_sudoc['ppn'] = df_sudoc['ppn'].astype(str)
     df_result = df_sudoc[df_sudoc["bu"].notna()].merge(df, left_on='ppn', right_on='ppn_z',how='left').drop(columns=['ppn_z','999-p_s'])
-    df_result = df_result[['ppn','011-a_z','200-a_z','NbLocs_i','bu','loc','cote','coll']]
+    df_result = df_result[['ppn','num_aleph','011-a_z','200-a_z','NbLocs_i','bu','loc','cote','coll']]
+    df_result = df_result.rename(columns={"ppn": "ppn", "num_aleph": "numéro notice Aleph", "011-a_z": "issn", "200-a_z": "titre", "NbLocs_i": "nombre de localisations Sudoc", "bu": "BU", "loc": "loc", "cote": "cote", "coll": "etat de collection"})
     df_result.to_excel(file_path('result_files/result.xlsx'),sheet_name=rcr)  
     print("...End processing") 
     return df_result
