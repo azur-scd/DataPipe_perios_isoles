@@ -2,7 +2,7 @@ FROM azurscd/base-notebook-java-userscd:latest
 ENV HOME=/home/scd
 USER scd
 COPY --chmod=777 . .
-RUN pip install -r linux_requirements.txt
+RUN pip install -r requirements.txt
 WORKDIR $HOME
 EXPOSE 8866
 VOLUME ["/home/scd/result_files","/home/scd/temporary_files"]
