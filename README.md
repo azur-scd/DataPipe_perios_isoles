@@ -74,3 +74,14 @@ docker run --name datapipe-perios-isoles -d -p 8866:8866 -v C:/Users/geoffroy/Do
 ```
 
 L'application est accessible en local sur http://localhost:VOTRE_PORT_DE_SORTIE/datapipe-perios-isoles
+
+### Développement
+
+* Mise à jour de l'image de base : voir la maj de [https://github.com/azur-scd/base-notebook-java-userscd](https://github.com/azur-scd/base-notebook-java-userscd)
+
+* Rebuild de l'image et push sur le Docker hub pour mise à jour
+
+```
+docker build -t azurscd/datapipe-perios-isoles:latest .
+docker push azurscd/datapipe-perios-isoles:latest
+```
